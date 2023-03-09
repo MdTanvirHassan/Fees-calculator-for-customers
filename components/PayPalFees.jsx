@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function PayPalFeeCalculator() {
   const [purchasePrice, setPurchasePrice] = useState(0);
-  const [feePercentage, setFeePercentage] = useState(2.9);
+  const [feePercentage, setFeePercentage] = useState(2.49);
   const [feeAmount, setFeeAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
@@ -14,8 +14,17 @@ function PayPalFeeCalculator() {
   const handlePaymentTypeChange = (event) => {
     const paymentType = event.target.value;
     if (paymentType === 'goodsandservices') {
-      setFeePercentage(2.9);
+      setFeePercentage(2.49);
     } else if (paymentType === 'friendsandfamily') {
+      setFeePercentage(0);
+    }
+    else if (paymentType === 'donations') {
+      setFeePercentage(1.50);
+    }
+    else if (paymentType === 'micropayment') {
+      setFeePercentage(0.1);
+    }
+    else if (paymentType === 'conditions') {
       setFeePercentage(1.9);
     }
     else{
@@ -91,9 +100,9 @@ function PayPalFeeCalculator() {
         >
           <option defaultValue value="goodsandservices">pay for goods or services</option>
           <option value="friendsandfamily">Payment to friends and family</option>
-          <option value="">to collect donations</option>
-          <option value="">micropayment</option>
-          <option value="">Payment with dealer conditions</option>
+          <option value="donations">to collect donations</option>
+          <option value="micropayment">micropayment</option>
+          <option value="conditions">Payment with dealer conditions</option>
         </select>
       </div>
       <div className="justify-evenly mb-5 bg-gray-50 rounded-lg shadow-md p-2">
