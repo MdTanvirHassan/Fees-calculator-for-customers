@@ -1,6 +1,7 @@
 import react, { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function PayPalFeeCalculator() {
   const [calculationBasis, setCalculationBasis] = useState('Purchase price');
   const [purchasePrice, setPurchasePrice] = useState(0);
@@ -26,14 +27,18 @@ function PayPalFeeCalculator() {
     const paymentType = event.target.value;
     if (paymentType === 'goodsandservices') {
       setFeePercentage(2.49);
+      setShowDealerConditions(false);
     } else if (paymentType === 'friendsandfamily') {
       setFeePercentage(0);
+      setShowDealerConditions(false);
     }
     else if (paymentType === 'donations') {
       setFeePercentage(1.50);
+      setShowDealerConditions(false);
     }
     else if (paymentType === 'micropayment') {
       setFeePercentage(0.1);
+      setShowDealerConditions(false);
     }
     else if (paymentType === 'conditions') {
       if (paymentType === 'conditions') {
@@ -45,7 +50,7 @@ function PayPalFeeCalculator() {
             setFeePercentage(2.19);
           } else if (purchasePrice == '5001-25000') {
             setFeePercentage(1.99);
-          } else if (purchasePrice == '100000+') {
+          } else if (purchasePrice == '25001-100000') {
             setFeePercentage(1.79);
           } else if (purchasePrice == '100000+') {
             setFeePercentage(1.49);
