@@ -1,6 +1,7 @@
-import react, { useState } from 'react';
+import react, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PieChart } from "react-minimal-pie-chart";
 
 function PayPalFeeCalculator() {
   const [calculationBasis, setCalculationBasis] = useState('Purchase price');
@@ -9,6 +10,10 @@ function PayPalFeeCalculator() {
   const [feeAmount, setFeeAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [showDealerConditions, setShowDealerConditions] = useState(false);
+
+  useEffect(() => {
+    calculateFee();
+  }, [purchasePrice, feePercentage]);
 
   const handleCalculationBasisChange = (event) => {
     const selectedValue = event.target.value;
@@ -25,10 +30,12 @@ function PayPalFeeCalculator() {
 
   const handlePaymentTypeChange = (event) => {
     const paymentType = event.target.value;
+  
     if (paymentType === 'goodsandservices') {
       setFeePercentage(2.49);
       setShowDealerConditions(false);
-    } else if (paymentType === 'friendsandfamily') {
+    } 
+    else if (paymentType === 'friendsandfamily') {
       setFeePercentage(0);
       setShowDealerConditions(false);
     }
@@ -41,40 +48,46 @@ function PayPalFeeCalculator() {
       setShowDealerConditions(false);
     }
     else if (paymentType === 'conditions') {
-      if (paymentType === 'conditions') {
-        setShowDealerConditions(true);
-         const purchasePrice = event.target.value;
-          if (purchasePrice == '0-2000') {
-            setFeePercentage(2.49);
-          } else if (purchasePrice == "2001-5000") {
-            setFeePercentage(2.19);
-          } else if (purchasePrice == '5001-25000') {
-            setFeePercentage(1.99);
-          } else if (purchasePrice == '25001-100000') {
-            setFeePercentage(1.79);
-          } else if (purchasePrice == '100000+') {
-            setFeePercentage(1.49);
-          }
-          // else{
-          //   setFeePercentage(1.09);
-          // }
-      } else {
-        setShowDealerConditions(false);
+      setShowDealerConditions(true);
+      const purchasePrice = event.target.options[event.target.selectedIndex].getAttribute('data-price');
+      if (purchasePrice == '0-2000') {
+        setFeePercentage(2.49);
+      } else if (purchasePrice == "2001-5000") {
+        setFeePercentage(2.19);
+      } else if (purchasePrice == '5001-25000') {
+        setFeePercentage(1.99);
+      } else if (purchasePrice == '25001-100000') {
+        setFeePercentage(1.79);
+      } else if (purchasePrice == '100000+') {
+        setFeePercentage(1.49);
       }
-     // setFeePercentage(1.9);
     }
-    else{
-        window.location.reload();
+    else {
+      // reload the page if an unexpected payment type is selected
+      window.location.reload();
     }
   };
+  
 
   const calculateFee = (event) => {
-    event.preventDefault();
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    
     if(purchasePrice > 0 ){
       const fee = purchasePrice * (feePercentage / 100) + 0.35;
     const total = purchasePrice + fee;
     setFeeAmount(fee);
     setTotalAmount(total);
+    toast.success("Successfully! Calculated.", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      toastId: "id",
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }else {
         toast.error("Purchase must be greater than 0!", {
           position: "top-right",
@@ -86,8 +99,10 @@ function PayPalFeeCalculator() {
           draggable: true,
           progress: undefined,
         });
-      }
+      }}
   };
+
+  const data = [    { title: "Purchase Price", value: purchasePrice, color: "#1d4ed8" },    { title: "Fee Amount", value: feeAmount, color: "#f87171" },  ];
 
   return (
     <div className="container max-w-[1240px] m-auto py-20">
@@ -149,13 +164,14 @@ function PayPalFeeCalculator() {
           </label>
           <select
             id="dealerConditions"
+            name='dealerConditions'
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           >
-            <option defaultValue value="0-2000">$0 - $2,000</option>
-            <option value="2001-5000">$2,001 - $5,000</option>
-            <option value="5001-25000">$5,001 - $25,000</option>
-            <option value="25001-100000">$25,001 - $100,000</option>
-            <option value="100000+">$100,000+</option>
+            <option defaultValue value="0-2000" data-price="0-2000">$0 - $2,000</option>
+            <option value="2001-5000" data-price="2001-5000">$2,001 - $5,000</option>
+            <option value="5001-25000" data-price="5001-25000">$5,001 - $25,000</option>
+            <option value="25001-100000" data-price="0-2000">$25,001 - $100,000</option>
+            <option value="100000+" data-price="0-2000">$100,000+</option>
           </select>
         </div>
       )}
@@ -188,6 +204,21 @@ function PayPalFeeCalculator() {
             <div className="bg-gray-50 rounded-lg shadow-md p-5">
               purchase price: <span className="ml-10">${totalAmount.toFixed(2)}</span>
             </div>
+            <div className="mt-8  w-40 m-auto">
+              <PieChart
+                data={data}
+                lineWidth={25}
+                className="border rounded-full shadow-2xl"
+                label={({ dataEntry }) => dataEntry.value.toFixed(1)}
+                labelStyle={{
+                  fontSize: "8px",
+                  fontFamily: "sans-serif",
+                  fill: "#fff",
+                }}
+                labelPosition={100 - (feeAmount / totalAmount) * 100}
+                startAngle={-90}
+              />
+        </div>
           </div>
       </div>
       </div>
