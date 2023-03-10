@@ -38,18 +38,21 @@ function PayPalFeeCalculator() {
     else if (paymentType === 'conditions') {
       if (paymentType === 'conditions') {
         setShowDealerConditions(true);
-        const purchasePrice = parseFloat(document.getElementById("purchasePrice").value);
-      if (purchasePrice <= 2000) {
-        setFeePercentage(2.49);
-      } else if (purchasePrice > 2000 && purchasePrice <= 5000) {
-        setFeePercentage(2.19);
-      } else if (purchasePrice > 5000 && purchasePrice <= 25000) {
-        setFeePercentage(1.99);
-      } else if (purchasePrice > 25000 && purchasePrice <= 100000) {
-        setFeePercentage(1.79);
-      } else if (purchasePrice > 100000) {
-        setFeePercentage(1.49);
-      }
+         const purchasePrice = event.target.value;
+          if (purchasePrice == '0-2000') {
+            setFeePercentage(2.49);
+          } else if (purchasePrice == "2001-5000") {
+            setFeePercentage(2.19);
+          } else if (purchasePrice == '5001-25000') {
+            setFeePercentage(1.99);
+          } else if (purchasePrice == '100000+') {
+            setFeePercentage(1.79);
+          } else if (purchasePrice == '100000+') {
+            setFeePercentage(1.49);
+          }
+          // else{
+          //   setFeePercentage(1.09);
+          // }
       } else {
         setShowDealerConditions(false);
       }
@@ -159,7 +162,7 @@ function PayPalFeeCalculator() {
       <div className="mb-4">
         <div
         type="button"
-          className="bg-blue-600 text-white text-center font-bold py-2 px-4 rounded hover:bg-blue-500"
+          className="bg-blue-600 text-white text-center font-bold py-2 px-4 rounded hover:bg-blue-500 cursor-pointer"
           onClick={calculateFee}
         >
           Calculate Fee
