@@ -2,10 +2,21 @@ import react, { useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function PayPalFeeCalculator() {
+  const [calculationBasis, setCalculationBasis] = useState('Purchase price');
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [feePercentage, setFeePercentage] = useState(2.49);
   const [feeAmount, setFeeAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [showDealerConditions, setShowDealerConditions] = useState(false);
+
+  const handleCalculationBasisChange = (event) => {
+    const selectedValue = event.target.value;
+    if (selectedValue === 'balance') {
+      setCalculationBasis('Balance');
+    } else {
+      setCalculationBasis('Purchase price');
+    }
+  };
 
   const handlePurchasePriceChange = (event) => {
     setPurchasePrice(parseFloat(event.target.value));
@@ -25,7 +36,24 @@ function PayPalFeeCalculator() {
       setFeePercentage(0.1);
     }
     else if (paymentType === 'conditions') {
-      setFeePercentage(1.9);
+      if (paymentType === 'conditions') {
+        setShowDealerConditions(true);
+        const purchasePrice = parseFloat(document.getElementById("purchasePrice").value);
+      if (purchasePrice <= 2000) {
+        setFeePercentage(2.49);
+      } else if (purchasePrice > 2000 && purchasePrice <= 5000) {
+        setFeePercentage(2.19);
+      } else if (purchasePrice > 5000 && purchasePrice <= 25000) {
+        setFeePercentage(1.99);
+      } else if (purchasePrice > 25000 && purchasePrice <= 100000) {
+        setFeePercentage(1.79);
+      } else if (purchasePrice > 100000) {
+        setFeePercentage(1.49);
+      }
+      } else {
+        setShowDealerConditions(false);
+      }
+     // setFeePercentage(1.9);
     }
     else{
         window.location.reload();
@@ -34,7 +62,8 @@ function PayPalFeeCalculator() {
 
   const calculateFee = (event) => {
     event.preventDefault();
-    if(purchasePrice > 0 ){const fee = purchasePrice * (feePercentage / 100);
+    if(purchasePrice > 0 ){
+      const fee = purchasePrice * (feePercentage / 100) + 0.35;
     const total = purchasePrice + fee;
     setFeeAmount(fee);
     setTotalAmount(total);
@@ -61,14 +90,15 @@ function PayPalFeeCalculator() {
           <form className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
           <div className="py-5">
               <label
-                htmlFor="countries"
+                htmlFor="calculation"
                 className="block mb-2 text-sm font-medium text-gray-900">
                 Calculation basis
               </label>
               <select
-                id="countries"
+                id="calculation"
+                 onChange={handleCalculationBasisChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option defaultValue >purchase price</option>
+                <option defaultValue >Purchase price</option>
                 <option value="balance">Balance</option>
               </select>
             </div>
@@ -85,7 +115,7 @@ function PayPalFeeCalculator() {
               <label
                 htmlFor="floating_outlined"
                 className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
-                purchase price
+                 {calculationBasis}
               </label>
             </div>
       
@@ -104,6 +134,23 @@ function PayPalFeeCalculator() {
           <option value="micropayment">micropayment</option>
           <option value="conditions">Payment with dealer conditions</option>
         </select>
+        {showDealerConditions && (
+        <div className="mt-4">
+          <label htmlFor="dealerConditions" className="block mb-2 text-sm font-medium text-gray-900">
+          Transactions received in the last month 
+          </label>
+          <select
+            id="dealerConditions"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          >
+            <option defaultValue value="0-2000">$0 - $2,000</option>
+            <option value="2001-5000">$2,001 - $5,000</option>
+            <option value="5001-25000">$5,001 - $25,000</option>
+            <option value="25001-100000">$25,001 - $100,000</option>
+            <option value="100000+">$100,000+</option>
+          </select>
+        </div>
+      )}
       </div>
       <div className="justify-evenly mb-5 bg-gray-50 rounded-lg shadow-md p-2">
               <span>Unit Rate: </span>
