@@ -49,17 +49,18 @@ function PayPalFeeCalculator() {
     }
     else if (paymentType === 'conditions') {
       setShowDealerConditions(true);
-      const purchasePrice = event.target.options[event.target.selectedIndex].getAttribute('data-price');
+      //const purchasePrice = event.target.options[event.target.selectedIndex].getAttribute('data-price');
+      const purchasePrice = event.target.value
       if (purchasePrice == '0-2000') {
         setFeePercentage(2.49);
       } else if (purchasePrice == "2001-5000") {
-        setFeePercentage(2.19);
+          setFeePercentage(2.19);
       } else if (purchasePrice == '5001-25000') {
-        setFeePercentage(1.99);
+          setFeePercentage(1.99);
       } else if (purchasePrice == '25001-100000') {
-        setFeePercentage(1.79);
+          setFeePercentage(1.79);
       } else if (purchasePrice == '100000+') {
-        setFeePercentage(1.49);
+          setFeePercentage(1.49);
       }
     }
     else {
@@ -80,7 +81,7 @@ function PayPalFeeCalculator() {
     setTotalAmount(total);
     toast.success("Successfully! Calculated.", {
       position: "top-right",
-      autoClose: 3000,
+      autoClose: 2000,
       hideProgressBar: true,
       toastId: "id",
       closeOnClick: true,
@@ -91,7 +92,7 @@ function PayPalFeeCalculator() {
   }else {
         toast.error("Purchase must be greater than 0!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: true,
           toastId: "id",
           closeOnClick: true,
@@ -209,13 +210,13 @@ function PayPalFeeCalculator() {
                 data={data}
                 lineWidth={25}
                 className="border rounded-full shadow-2xl"
-                label={({ dataEntry }) => dataEntry.value.toFixed(1)}
+                label={({ dataEntry }) => dataEntry.value.toFixed(2)}
                 labelStyle={{
                   fontSize: "8px",
                   fontFamily: "sans-serif",
                   fill: "#fff",
                 }}
-                labelPosition={100 - (feeAmount / totalAmount) * 100}
+                labelPosition={100 - (feeAmount / totalAmount) * 100 -10}
                 startAngle={-90}
               />
         </div>
