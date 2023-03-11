@@ -1,7 +1,7 @@
 import react, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { PieChart } from "react-minimal-pie-chart";
+//import { PieChart } from "react-minimal-pie-chart";
 
 function PayPalFeeCalculator() {
   const [calculationBasis, setCalculationBasis] = useState('Purchase price');
@@ -12,9 +12,6 @@ function PayPalFeeCalculator() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [showDealerConditions, setShowDealerConditions] = useState(false);
 
-  useEffect(() => {
-    calculateFee();
-  }, [purchasePrice, feePercentage]);
 
   const handleCalculationBasisChange = (event) => {
     const selectedValue = event.target.value;
@@ -30,6 +27,8 @@ function PayPalFeeCalculator() {
   };
 
   const handlePaymentTypeChange = (event) => {
+    if (event && event.preventDefault) {
+      event.preventDefault();
     const paymentType = event.target.value;
   
     if (paymentType === 'goodsandservices') {
@@ -54,25 +53,25 @@ function PayPalFeeCalculator() {
     }
     else if (paymentType === 'conditions') {
       setShowDealerConditions(true);
-      setFeeCharge(0.35)
-      //const purchasePrice = event.target.options[event.target.selectedIndex].getAttribute('data-price');
-      const purchasePrice = event.target.value;
-      if (purchasePrice == '0-2000') {
+      setFeeCharge(0.35);
+      const purchasePrices = event.target.value;
+      if (purchasePrices === '0-2000') {
         setFeePercentage(2.49);
-      } else if (purchasePrice == "2001-5000") {
-          setFeePercentage(2.19);
-      } else if (purchasePrice == '5001-25000') {
-          setFeePercentage(1.99);
-      } else if (purchasePrice == '25001-100000') {
-          setFeePercentage(1.79);
-      } else if (purchasePrice == '100000+') {
-          setFeePercentage(1.49);
+      } else if (purchasePrices === "2001-5000") {
+        setFeePercentage(2.19);
+      } else if (purchasePrices === '5001-25000') {
+        setFeePercentage(1.99);
+      } else if (purchasePrices === '25001-100000') {
+        setFeePercentage(1.79);
+      } else if (purchasePrices === '100000+') {
+        setFeePercentage(1.49);
       }
     }
     else {
       // reload the page if an unexpected payment type is selected
       window.location.reload();
     }
+  }
   };
   
 
@@ -109,7 +108,11 @@ function PayPalFeeCalculator() {
       }}
   };
 
-  const data = [    { title: "Purchase Price", value: purchasePrice, color: "#1d4ed8" },    { title: "Fee Amount", value: feeAmount, color: "#f87171" },  ];
+  // useEffect(() => {
+  //   calculateFee();
+  // }, [purchasePrice, feePercentage]);
+
+  // const data = [    { title: "Purchase Price", value: purchasePrice, color: "#1d4ed8" },    { title: "Fee Amount", value: feeAmount, color: "#f87171" },  ];
 
   return (
     <div className="container max-w-[1240px] m-auto py-20">
@@ -164,24 +167,40 @@ function PayPalFeeCalculator() {
           <option value="micropayment">micropayment</option>
           <option value="conditions">Payment with dealer conditions</option>
         </select>
+
         {showDealerConditions && (
-        <div className="mt-4">
-          <label htmlFor="dealerConditions" className="block mb-2 text-sm font-medium text-gray-900">
-          Transactions received in the last month 
-          </label>
-          <select
-            id="dealerConditions"
-            name='dealerConditions'
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          >
-            <option defaultValue value="0-2000" data-price="0-2000">$0 - $2,000</option>
-            <option value="2001-5000" data-price="2001-5000">$2,001 - $5,000</option>
-            <option value="5001-25000" data-price="5001-25000">$5,001 - $25,000</option>
-            <option value="25001-100000" data-price="0-2000">$25,001 - $100,000</option>
-            <option value="100000+" data-price="0-2000">$100,000+</option>
-          </select>
-        </div>
-      )}
+            <div className="mt-4">
+              <label htmlFor="dealerConditions" className="block mb-2 text-sm font-medium text-gray-900">
+                Transactions received in the last month 
+              </label>
+              <select
+                id="dealerConditions"
+                name='dealerConditions'
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                onChange={(event) => {
+                  const purchasePrices = event.target.value;
+                  if (purchasePrices === '0-2000') {
+                    setFeePercentage(2.49);
+                  } else if (purchasePrices === "2001-5000") {
+                    setFeePercentage(2.19);
+                  } else if (purchasePrices === '5001-25000') {
+                    setFeePercentage(1.99);
+                  } else if (purchasePrices === '25001-100000') {
+                    setFeePercentage(1.79);
+                  } else if (purchasePrices === '100000+') {
+                    setFeePercentage(1.49);
+                  }
+                }}
+              >
+                <option defaultValue value="0-2000" data-price="0-2000">$0 - $2,000</option>
+                <option value="2001-5000" data-price="2001-5000">$2,001 - $5,000</option>
+                <option value="5001-25000" data-price="5001-25000">$5,001 - $25,000</option>
+                <option value="25001-100000" data-price="25001-100000">$25,001 - $100,000</option>
+                <option value="100000+" data-price="100000+">$100,000+</option>
+              </select>
+            </div>
+          )}
+
       </div>
       <div className="justify-evenly mb-5 bg-gray-50 rounded-lg shadow-md p-2">
               <span>Unit Rate: </span>
@@ -211,7 +230,7 @@ function PayPalFeeCalculator() {
             <div className="bg-gray-50 rounded-lg shadow-md p-5">
               purchase price: <span className="ml-10">${totalAmount.toFixed(2)}</span>
             </div>
-            <div className="mt-8  w-40 m-auto">
+            {/* <div className="mt-8  w-40 m-auto">
               <PieChart
                 data={data}
                 lineWidth={25}
@@ -225,7 +244,7 @@ function PayPalFeeCalculator() {
                 labelPosition={100 - (feeAmount / totalAmount) * 100 -10}
                 startAngle={-90}
               />
-        </div>
+        </div> */}
           </div>
       </div>
       </div>
