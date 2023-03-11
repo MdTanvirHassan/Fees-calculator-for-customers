@@ -1,9 +1,9 @@
 import react, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import { PieChart } from "react-minimal-pie-chart";
 
 function PayPalFeeCalculator() {
+  
   const [calculationBasis, setCalculationBasis] = useState('Purchase price');
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [feePercentage, setFeePercentage] = useState(2.49);
@@ -54,18 +54,8 @@ function PayPalFeeCalculator() {
     else if (paymentType === 'conditions') {
       setShowDealerConditions(true);
       setFeeCharge(0.35);
-      const purchasePrices = event.target.value;
-      if (purchasePrices === '0-2000') {
-        setFeePercentage(2.49);
-      } else if (purchasePrices === "2001-5000") {
-        setFeePercentage(2.19);
-      } else if (purchasePrices === '5001-25000') {
-        setFeePercentage(1.99);
-      } else if (purchasePrices === '25001-100000') {
-        setFeePercentage(1.79);
-      } else if (purchasePrices === '100000+') {
-        setFeePercentage(1.49);
-      }
+      setFeePercentage(2.49);
+      
     }
     else {
       // reload the page if an unexpected payment type is selected
@@ -73,7 +63,7 @@ function PayPalFeeCalculator() {
     }
   }
   };
-  
+
 
   const calculateFee = (event) => {
     if (event && event.preventDefault) {
@@ -107,12 +97,6 @@ function PayPalFeeCalculator() {
         });
       }}
   };
-
-  // useEffect(() => {
-  //   calculateFee();
-  // }, [purchasePrice, feePercentage]);
-
-  // const data = [    { title: "Purchase Price", value: purchasePrice, color: "#1d4ed8" },    { title: "Fee Amount", value: feeAmount, color: "#f87171" },  ];
 
   return (
     <div className="container max-w-[1240px] m-auto py-20">
@@ -178,16 +162,16 @@ function PayPalFeeCalculator() {
                 name='dealerConditions'
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 onChange={(event) => {
-                  const purchasePrices = event.target.value;
-                  if (purchasePrices === '0-2000') {
+                  const dealerConditions = event.target.value;
+                  if (dealerConditions === '0-2000') {
                     setFeePercentage(2.49);
-                  } else if (purchasePrices === "2001-5000") {
+                  } else if (dealerConditions === "2001-5000") {
                     setFeePercentage(2.19);
-                  } else if (purchasePrices === '5001-25000') {
+                  } else if (dealerConditions === '5001-25000') {
                     setFeePercentage(1.99);
-                  } else if (purchasePrices === '25001-100000') {
+                  } else if (dealerConditions === '25001-100000') {
                     setFeePercentage(1.79);
-                  } else if (purchasePrices === '100000+') {
+                  } else if (dealerConditions === '100000+') {
                     setFeePercentage(1.49);
                   }
                 }}
