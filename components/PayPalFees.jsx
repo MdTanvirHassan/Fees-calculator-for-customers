@@ -7,6 +7,7 @@ function PayPalFeeCalculator() {
   const [calculationBasis, setCalculationBasis] = useState('Purchase price');
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [feePercentage, setFeePercentage] = useState(2.49);
+  const [feeCharge, setFeeCharge] = useState(0.35);
   const [feeAmount, setFeeAmount] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [showDealerConditions, setShowDealerConditions] = useState(false);
@@ -33,24 +34,29 @@ function PayPalFeeCalculator() {
   
     if (paymentType === 'goodsandservices') {
       setFeePercentage(2.49);
+      setFeeCharge(0.35)
       setShowDealerConditions(false);
     } 
     else if (paymentType === 'friendsandfamily') {
       setFeePercentage(0);
+      setFeeCharge(0.35)
       setShowDealerConditions(false);
     }
     else if (paymentType === 'donations') {
       setFeePercentage(1.50);
+      setFeeCharge(0.35)
       setShowDealerConditions(false);
     }
     else if (paymentType === 'micropayment') {
-      setFeePercentage(0.1);
+      setFeePercentage(10);
+      setFeeCharge(0.10)
       setShowDealerConditions(false);
     }
     else if (paymentType === 'conditions') {
       setShowDealerConditions(true);
+      setFeeCharge(0.35)
       //const purchasePrice = event.target.options[event.target.selectedIndex].getAttribute('data-price');
-      const purchasePrice = event.target.value
+      const purchasePrice = event.target.value;
       if (purchasePrice == '0-2000') {
         setFeePercentage(2.49);
       } else if (purchasePrice == "2001-5000") {
@@ -75,7 +81,7 @@ function PayPalFeeCalculator() {
       event.preventDefault();
     
     if(purchasePrice > 0 ){
-      const fee = purchasePrice * (feePercentage / 100) + 0.35;
+      const fee = purchasePrice * (feePercentage / 100) + feeCharge;
     const total = purchasePrice + fee;
     setFeeAmount(fee);
     setTotalAmount(total);
@@ -179,7 +185,7 @@ function PayPalFeeCalculator() {
       </div>
       <div className="justify-evenly mb-5 bg-gray-50 rounded-lg shadow-md p-2">
               <span>Unit Rate: </span>
-              <span className="ml-20">{feePercentage}% and €0.35</span>
+              <span className="ml-20">{feePercentage}% and €{feeCharge}</span>
             </div>
       <div className="mb-4">
         <div
