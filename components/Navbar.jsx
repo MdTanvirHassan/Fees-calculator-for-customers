@@ -1,157 +1,46 @@
 //import Image from "next/image";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-//import NavLogo from "../public/assets/logo.png";
+//import Link from "next/link";
+import React from "react";
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
-  const [shadow, setShadow] = useState(false);
-  const [navBg, setNavBg] = useState("transparent");
-  const [linkColor, setLinkColor] = useState("#000000");
-  // const [position, setPosition] = useState('fixed')
-
-  const handleNav = () => {
-    setNav(!nav);
-  };
-
-  useEffect(() => {
-    const handleShadow = () => {
-      if (window.scrollY >= 40) {
-        setShadow(true);
-        setNavBg("#ffffff");
-        setLinkColor("#000000");
-      } else {
-        setShadow(false);
-        setNavBg("transparent");
-        setLinkColor("#000000");
-      }
-    };
-    window.addEventListener("scroll", handleShadow);
-  }, []);
+  
 
   return (
-    <div
-      style={{ backgroundColor: `${navBg}` }}
-      className={
-        shadow
-          ? "fixed w-full h-20 lg:h-[75px] shadow-lg shadow-gray-700 z-[100] ease-in-out duration-300"
-          : "fixed w-full h-20 z-[100]"
-      }>
-      <div className="flex justify-between items-center w-full h-full lg:w-[1246px] lg:h-[50px] m-auto lg:mt-[22px]">
-        <Link href="/">
-          <div className="">
-            {/* <Image
-            //   src={NavLogo}
-            //   alt="/"
-            //   width="141"
-            //   height="38"
-              className="cursor-pointer  m-auto mt-6"
-            /> */}
-          </div>
-        </Link>
-        <div>
-          <ul style={{ color: `${linkColor}` }} className="hidden lg:flex">
-            <li className="ml-7 text-bold hover:text-gray-600">
-              <Link href="/">Home</Link>
-            </li>
-            <li className="ml-7 text-bold hover:text-gray-600">
-              <Link href="/#program">Program</Link>
-            </li>
-            <li className="ml-7 text-bold hover:text-gray-600">
-              <Link href="/#blog">Blog</Link>
-            </li>
-            <li className="ml-7 text-bold hover:text-gray-600">
-              <Link href="/#about">About us</Link>
-            </li>
-
-            {/* <li className="ml-7 text-bold hover:text-gray-600">
-              <Link href="/#login">
-                <button
-                  type="button"
-                  className="bg-[#264373] text-white w-[114px] h-[50px] rounded-[10px] hover:bg-indigo-900 active:ring-1 -mt-5">
-                  Log in
-                </button>
-              </Link>
-            </li> */}
-          </ul>
-          {/* Hamburger Icon */}
-          <div
-            style={{ color: `${linkColor}` }}
-            onClick={handleNav}
-            className="lg:hidden px-4">
-            <AiOutlineMenu size={25} className="text-black" />
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {/* Overlay */}
-      <div
-        className={
-          nav ? "lg:hidden fixed left-0 top-0 w-full h-screen bg-black/70" : ""
-        }>
-        {/* Side Drawer Menu */}
-        <div
-          className={
-            nav
-              ? " fixed left-0 top-0 w-[75%] sm:w-[60%] md:w-[45%] h-screen bg-[#ecf0f3] p-5 ease-in duration-500"
-              : "fixed left-[-150%] top-0 p-5 ease-in duration-500"
-          }>
-          <div>
-            <div className="flex flex-row w-full items-center justify-between">
-              {/* <Link href="/">
-                <>
-                  <Image
-                    // src={NavLogo}
-                    // width="275"
-                    // height="75"
-                    // alt="/"
-                    // className=""
-                  />
-                </>
-              </Link> */}
-              <div
-                onClick={handleNav}
-                className="rounded-full shadow-lg shadow-gray-400 p-3 cursor-pointer ">
-                <AiOutlineClose className="text-black" />
-              </div>
-            </div>
-            <div className="border-b border-gray-300 my-2"></div>
-          </div>
-          <div className="py-2 flex flex-col">
-            <ul className="uppercase">
-              <Link href="/">
-                <li onClick={() => setNav(false)} className="py-2 text-sm">
-                  Home
-                </li>
-              </Link>
-              <Link href="/#program">
-                <li onClick={() => setNav(false)} className="py-2 text-sm">
-                  Program
-                </li>
-              </Link>
-              <Link href="/#blog">
-                <li onClick={() => setNav(false)} className="py-2 text-sm">
-                  Blog
-                </li>
-              </Link>
-              <Link href="/#about">
-                <li onClick={() => setNav(false)} className="py-2 text-sm">
-                  About us
-                </li>
-              </Link>
-
-              {/* <Link href="/#login">
-                <li onClick={() => setNav(false)} className="py-2 text-sm">
-                  Log in
-                </li>
-              </Link> */}
-            </ul>
-          </div>
-        </div>
-      </div>
+    <>
+      
+<nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+  <div className="container flex flex-wrap items-center justify-between mx-auto">
+    <a href="/" className="flex items-center">
+        {/* <img src="" className="h-6 mr-3 sm:h-9" alt="Logo" /> */}
+        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Fees Calculator</span>
+    </a>
+    <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+      <span className="sr-only">Open main menu</span>
+      <svg className="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
+    </button>
+    <div className="hidden w-full md:block md:w-auto" id="navbar-default">
+      <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+          <a href="#" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
+        </li>
+        <li>
+          <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
+
+    </>
   );
 };
 

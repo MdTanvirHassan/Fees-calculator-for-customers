@@ -23,7 +23,10 @@ function PayPalFeeCalculator() {
   };
 
   const handlePurchasePriceChange = (event) => {
-    setPurchasePrice(parseFloat(event.target.value));
+    const inputVal = event.target.value;
+    if (inputVal >= 0) {
+      setPurchasePrice(parseFloat(inputVal));
+    }
   };
 
   const handlePaymentTypeChange = (event) => {
@@ -102,20 +105,20 @@ function PayPalFeeCalculator() {
     <div className="container max-w-[1240px] m-auto py-20">
         <ToastContainer />
         <div className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
-        <h2 className="text-center py-5">Tax Calculator</h2>
+        <h2 className="text-blue-500 text-center py-5">Fees Calculator for Customers</h2>
         <div className="grid md:grid-cols-2 gap-10">
           <form className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
           <div className="py-5">
               <label
                 htmlFor="calculation"
-                className="block mb-2 text-sm font-medium text-gray-900">
-                Calculation basis
+                className="block mb-2 text-xl font-bold text-gray-900">
+                Calculation Basis
               </label>
               <select
                 id="calculation"
                  onChange={handleCalculationBasisChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                <option defaultValue >Purchase price</option>
+                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5">
+                <option defaultValue >Purchase Price</option>
                 <option value="balance">Balance</option>
               </select>
             </div>
@@ -126,23 +129,23 @@ function PayPalFeeCalculator() {
                 id="purchasePrice"
                 value={purchasePrice}
                 onChange={handlePurchasePriceChange}
-                className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block px-2.5 pb-2.5 pt-4 w-full text-lg text-gray-500 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 
               />
               <label
                 htmlFor="floating_outlined"
-                className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+                className="absolute text-xl font-bold text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
                  {calculationBasis}
               </label>
             </div>
       
-      <div className="mb-4">
-        <label htmlFor="paymentType" className="block mb-2 text-sm font-medium text-gray-900">
-                type of payment
+      <div className="my-4">
+        <label htmlFor="paymentType" className="block mb-2 text-xl font-bold text-gray-900">
+                Type of payment
         </label>
         <select
           id="paymentType"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5"
           onChange={handlePaymentTypeChange}
         >
           <option defaultValue value="goodsandservices">pay for goods or services</option>
@@ -154,13 +157,13 @@ function PayPalFeeCalculator() {
 
         {showDealerConditions && (
             <div className="mt-4">
-              <label htmlFor="dealerConditions" className="block mb-2 text-sm font-medium text-gray-900">
+              <label htmlFor="dealerConditions" className="block mb-2 text-xl font-medium text-gray-900">
                 Transactions received in the last month 
               </label>
               <select
                 id="dealerConditions"
                 name='dealerConditions'
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5"
                 onChange={(event) => {
                   const dealerConditions = event.target.value;
                   if (dealerConditions === '0-2000') {
@@ -187,13 +190,13 @@ function PayPalFeeCalculator() {
 
       </div>
       <div className="justify-evenly mb-5 bg-gray-50 rounded-lg shadow-md p-2">
-              <span>Unit Rate: </span>
-              <span className="ml-20">{feePercentage}% and €{feeCharge}</span>
+              <span className='text-xl font-bold'>Unit Rate: </span>
+              <span className="ml-20 md:ml-60 text-blue-500 text-lg ">{feePercentage}% <span className='text-black'>and</span> €{feeCharge}</span>
             </div>
       <div className="mb-4">
         <div
         type="button"
-          className="bg-blue-600 text-white text-center font-bold py-2 px-4 rounded hover:bg-blue-500 cursor-pointer"
+          className="bg-blue-600 text-white text-center font-bold py-2 px-4 rounded-md hover:bg-blue-500 cursor-pointer"
           onClick={calculateFee}
         >
           Calculate Fee
@@ -201,34 +204,19 @@ function PayPalFeeCalculator() {
       </div>
       
       </form>
-      <div className="right space-y-2">
-            <h3 className="text-center bg-gray-50 rounded-lg shadow-md p-5">
+      <div className="right space-y-4 my-auto">
+            <h3 className="text-xl text-center text-white bg-green-400 rounded-lg shadow-md p-5">
               Calculation
             </h3>
-            <div className="bg-gray-50 rounded-lg shadow-md p-5">
-              Fee Percentage: <span className="ml-10"> {feePercentage}%</span>
+            <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
+              Fee Percentage: <span className="ml-10 text-blue-600"> {feePercentage}%</span>
             </div>
-            <div className="bg-gray-50 rounded-lg shadow-md p-5">
-              Paypal fees: <span className="ml-10">${feeAmount.toFixed(2)} </span>
+            <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
+              Paypal fees: <span className="ml-10 text-blue-600">${feeAmount.toFixed(2)} </span>
             </div>
-            <div className="bg-gray-50 rounded-lg shadow-md p-5">
-              purchase price: <span className="ml-10">${totalAmount.toFixed(2)}</span>
+            <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
+              purchase price: <span className="ml-10 text-blue-600">${totalAmount.toFixed(2)}</span>
             </div>
-            {/* <div className="mt-8  w-40 m-auto">
-              <PieChart
-                data={data}
-                lineWidth={25}
-                className="border rounded-full shadow-2xl"
-                label={({ dataEntry }) => dataEntry.value.toFixed(2)}
-                labelStyle={{
-                  fontSize: "8px",
-                  fontFamily: "sans-serif",
-                  fill: "#fff",
-                }}
-                labelPosition={100 - (feeAmount / totalAmount) * 100 -10}
-                startAngle={-90}
-              />
-        </div> */}
           </div>
       </div>
       </div>
