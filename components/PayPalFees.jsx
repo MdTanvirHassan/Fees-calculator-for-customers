@@ -108,21 +108,21 @@ function PayPalFeeCalculator() {
         <h2 className="text-blue-500 text-center py-5">Fees Calculator for Customers</h2>
         <div className="grid md:grid-cols-2 gap-10">
           <form className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
-          <div className="py-5">
-              <label
-                htmlFor="calculation"
-                className="block mb-2 text-xl font-bold text-gray-900">
-                Calculation Basis
-              </label>
-              <select
-                id="calculation"
-                 onChange={handleCalculationBasisChange}
-                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5">
-                <option defaultValue >Purchase Price</option>
-                <option value="balance">Balance</option>
-              </select>
-            </div>
-        
+            <div className="py-5">
+                <label
+                  htmlFor="calculation"
+                  className="block mb-2 text-xl font-bold text-gray-900">
+                  Calculation Basis
+                </label>
+                <select
+                  id="calculation"
+                  onChange={handleCalculationBasisChange}
+                  className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5 space-y-4 select">
+                  <option defaultValue >Purchase Price</option>
+                  <option value="balance">Balance</option>
+                </select>
+              </div>
+          
         <div className="relative">
               <input
                 type="number"
@@ -145,7 +145,7 @@ function PayPalFeeCalculator() {
         </label>
         <select
           id="paymentType"
-          className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5"
+          className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5 space-y-4"
           onChange={handlePaymentTypeChange}
         >
           <option defaultValue value="goodsandservices">pay for goods or services</option>
@@ -163,7 +163,7 @@ function PayPalFeeCalculator() {
               <select
                 id="dealerConditions"
                 name='dealerConditions'
-                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5"
+                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-5 space-y-4"
                 onChange={(event) => {
                   const dealerConditions = event.target.value;
                   if (dealerConditions === '0-2000') {
