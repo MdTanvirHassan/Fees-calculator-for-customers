@@ -47,15 +47,15 @@ function PayPalFeeCalculator() {
         setShowDealerConditions(false);
         const paymentOut = event.target.value;
       if (paymentOut === "Britain") {
-        setPaymentOutPercentage(3.78);
+        setPaymentOutPercentage(1.29);
       } else if (paymentOut == "USA") {
-        setPaymentOutPercentage(4.48);
+        setPaymentOutPercentage(1.99);
       } else if (paymentOut == "german") {
-        setPaymentOutPercentage(5.48);
+        setPaymentOutPercentage(0);
       } else if (paymentOut == "EEA") {
-        setPaymentOutPercentage(5.48);
+        setPaymentOutPercentage(0);
       } else if (paymentOut == "other") {
-        setPaymentOutPercentage(5.48);
+        setPaymentOutPercentage(2.99);
       }
       } else if (paymentType === "friendsandfamily") {
         setFeePercentage(0);
