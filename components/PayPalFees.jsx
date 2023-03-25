@@ -14,6 +14,7 @@ function PayPalFeeCalculator() {
   const [showPurchase, setShowPurchase] = useState(true);
   const [showDealerConditions, setShowDealerConditions] = useState(false);
   const [showCalculation, setShowCalculation] = useState(false);
+  const [paymentOutPercentage, setPaymentOutPercentage] = useState(5.48);
 
   const handleCalculationBasisChange = (event) => {
     const selectedValue = event.target.value;
@@ -44,6 +45,18 @@ function PayPalFeeCalculator() {
         setFeePercentage(2.49);
         setFeeCharge(0.35);
         setShowDealerConditions(false);
+        const paymentOut = event.target.value;
+      if (paymentOut === "Britain") {
+        setPaymentOutPercentage(3.78);
+      } else if (paymentOut == "USA") {
+        setPaymentOutPercentage(4.48);
+      } else if (paymentOut == "german") {
+        setPaymentOutPercentage(5.48);
+      } else if (paymentOut == "EEA") {
+        setPaymentOutPercentage(5.48);
+      } else if (paymentOut == "other") {
+        setPaymentOutPercentage(5.48);
+      }
       } else if (paymentType === "friendsandfamily") {
         setFeePercentage(0);
         setFeeCharge(0.35);
@@ -66,6 +79,27 @@ function PayPalFeeCalculator() {
     }
   };
 
+  const handlePaymentOut = (event) => {
+    if (event && event.preventDefault) {
+      event.preventDefault();
+      const paymentOut = event.target.value;
+      if (paymentOut === "Britain") {
+        setPaymentOutPercentage(3.78);
+      } else if (paymentOut == "USA") {
+        setPaymentOutPercentage(4.48);
+      } else if (paymentOut == "german") {
+        setPaymentOutPercentage(5.48);
+      } else if (paymentOut == "EEA") {
+        setPaymentOutPercentage(5.48);
+      } else if (paymentOut == "other") {
+        setPaymentOutPercentage(5.48);
+      } else {
+        // reload the page if an unexpected payment type is selected
+        window.location.reload();
+      }
+    }
+  };
+
   const calculateFee = (event) => {
     if (event && event.preventDefault) {
       event.preventDefault();
@@ -78,7 +112,7 @@ function PayPalFeeCalculator() {
         setFeeAmount(fee);
         setTotalPurchaseAmount(total);
         setTotalBalanceAmount(total1);
-        toast.success("Successfully! Calculated.", {
+        toast.success("Erfolgreich! Berechnet.", {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: true,
@@ -89,7 +123,7 @@ function PayPalFeeCalculator() {
           progress: undefined,
         });
       } else {
-        toast.error("Purchase must be greater than 0!", {
+        toast.error("Der Kauf muss größer als 0 sein!", {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: true,
@@ -106,12 +140,52 @@ function PayPalFeeCalculator() {
   return (
     <div className="container max-w-[1240px] m-auto py-20">
       <ToastContainer />
-      <div className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
-        <h1 className="text-black text-2xl font-bold text-center py-5">
-          PayPal Gebührenrechner
+      <div className="pb-20">
+        <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-5xl sm:leading-none">
+          PayPal Gebührenrechner - Berechnen Sie Ihre PayPal Gebühren einfach
+          und schnell
         </h1>
+        <div className="mt-6 border-t border-gray-200 pt-10">
+          <h3 className="text-lg leading-8 font-medium text-gray-900">
+            Wenn Sie ein Online-Verkäufer oder Freiberufler sind und PayPal
+            verwenden, um Zahlungen zu empfangen, wissen Sie, dass PayPal für
+            jede Transaktion eine Gebühr erhebt. Diese Gebühren können sich
+            schnell summieren, und es ist wichtig zu wissen, wie viel Sie zahlen
+            werden, um unerwartete Kosten zu vermeiden.Unser
+            PayPal-Gebührenrechner ist einfach zu bedienen. Geben Sie einfach
+            den Betrag ein, den Sie erhalten, und unser Rechner berechnet
+            automatisch die Gebühren, die Ihnen auf der Grundlage Ihres
+            PayPal-Kontotyps und -Standorts berechnet werden. Sie können den
+            Bruttobetrag, die PayPal-Gebühren, den Nettobetrag und den
+            Prozentsatz der von Ihrer Transaktion abgezogenen Gebühren sehen.
+            Unser PayPal-Gebührenrechner ist aktuell und genau, sodass Sie
+            sicher sein können, dass Sie die genauesten Ergebnisse erhalten. Wir
+            berücksichtigen alle Faktoren, die sich auf Ihre PayPal-Gebühren
+            auswirken können, einschließlich Ihres Kontotyps, Ihrer Währung und
+            Ihres Standorts. Mit unserem PayPal-Gebührenrechner können Sie Zeit
+            und Geld sparen, da Sie genau wissen, welche Gebühren Ihnen
+            berechnet werden, bevor Sie Ihre Transaktion durchführen. Keine
+            Überraschungen oder versteckten Gebühren mehr – Sie haben alle
+            Informationen, die Sie benötigen, um fundierte Entscheidungen über
+            Ihre Geschäftstransaktionen zu treffen. Einer der Vorteile unseres
+            PayPal Gebührenrechners ist, dass er kostenlos zu nutzen ist. Es
+            gibt keine versteckten Gebühren oder Kosten - geben Sie einfach den
+            Transaktionsbetrag ein und erhalten Sie eine sofortige Berechnung
+            Ihrer Gebühren. Neben der Berechnung Ihrer Gebühren bietet unser
+            PayPal Gebührenrechner auch eine Aufschlüsselung der Gebühren, so
+            dass Sie genau sehen können, wo Ihr Geld hingeht. Diese
+            Informationen können bei der Festlegung von Preisen für Ihre
+            Produkte oder Dienstleistungen hilfreich sein, da Sie die Gebühren
+            berücksichtigen und dennoch einen Gewinn erzielen können.
+          </h3>
+        </div>
+      </div>
+      <div className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
         <div className="grid md:grid-cols-2 gap-10">
-          <form className="p-8 bg-white/10 z-10 backdrop-filter backdrop-blur-lg shadow-xl rounded-md ring-1 ring-gray-50">
+          <form className="p-8 bg-white/10 z-10 backdrop-filter rounded-md">
+            <h1 className="text-black text-2xl bg-amber-200 font-bold text-center py-5">
+              PayPal Gebührenrechner
+            </h1>
             <div className="py-5">
               <label
                 htmlFor="calculation"
@@ -178,15 +252,15 @@ function PayPalFeeCalculator() {
                     className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-3 px-5"
                     onChange={(event) => {
                       const dealerConditions = event.target.value;
-                      if (dealerConditions === "0-2000") {
+                      if (dealerConditions == "0-2000") {
                         setFeePercentage(2.49);
-                      } else if (dealerConditions === "2001-5000") {
+                      } else if (dealerConditions == "2001-5000") {
                         setFeePercentage(2.19);
-                      } else if (dealerConditions === "5001-25000") {
+                      } else if (dealerConditions == "5001-25000") {
                         setFeePercentage(1.99);
-                      } else if (dealerConditions === "25001-100000") {
+                      } else if (dealerConditions == "25001-100000") {
                         setFeePercentage(1.79);
-                      } else if (dealerConditions === "100000+") {
+                      } else if (dealerConditions == "100000+") {
                         setFeePercentage(1.49);
                       }
                     }}>
@@ -209,11 +283,46 @@ function PayPalFeeCalculator() {
                 </div>
               )}
             </div>
+            <div className="py-5">
+              <label
+                htmlFor="calculation"
+                className="block mb-2 text-xl font-bold text-gray-900">
+                Zahlung aus
+              </label>
+              <select
+                id="paymentOut"
+                name="paymentOut"
+                onChange={handlePaymentOut}
+                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-3 px-5"
+                // onChange={(event) => {
+                //   const paymentOut = event.target.value;
+                //   if(paymentOut === 'Britain'){
+                //     setFeePercentage(3.78);
+                //   } else if(paymentOut == 'USA'){
+                //     setFeePercentage(4.48);
+                //   } else if(paymentOut == 'german'){
+                //     setFeePercentage(5.48);
+                //   } else if(paymentOut == 'EEA'){
+                //     setFeePercentage(5.48);
+                //   } else if(paymentOut == 'other'){
+                //     setFeePercentage(5.48);
+                //   }
+                // }}
+              >
+                <option defaultValue value="german">
+                  Deutschland
+                </option>
+                <option value="EEA">EEA</option>
+                <option value="Britain">Graet Britain</option>
+                <option value="USA">USA/Canada</option>
+                <option value=" other">All other</option>
+              </select>
+            </div>
             <div className="justify-evenly mb-5 bg-gray-50 rounded-lg p-3 shadow-md ">
               <span className="text-xl font-bold">Gebührensatz: </span>
               <span className="ml-20 md:ml-48 text-blue-500 text-lg ">
-                {feePercentage}% <span className="text-black">and</span> €
-                {feeCharge}
+                { feePercentage + paymentOutPercentage }%
+                <span className="text-black">and</span> €{feeCharge}
               </span>
             </div>
             <div className="mb-4">
@@ -226,37 +335,39 @@ function PayPalFeeCalculator() {
             </div>
           </form>
           {showCalculation && (
-            <div className="right space-y-4 my-auto">
-              <h3 className="text-xl text-center font-bold text-white bg-green-400 rounded-lg shadow-md p-5">
-                Berechnung
-              </h3>
-              <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
-                Gebührenprozentsatz:{" "}
-                <span className="ml-10 text-blue-600"> {feePercentage}%</span>
-              </div>
-              <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
-                PayPal Gebühren:{" "}
-                <span className="ml-10 text-blue-600">
-                  ${feeAmount.toFixed(2)}{" "}
-                </span>
-              </div>
-              {showPurchase && (
+            <form className="p-8 bg-white/10 z-10  rounded-md ring-1 ring-gray-50">
+              <div className="right space-y-4 my-auto">
+                <h3 className="text-xl text-center font-bold text-white bg-green-400 rounded-lg shadow-md p-5">
+                  Berechnung
+                </h3>
                 <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
-                  Kaufpreis:{" "}
+                  Gebührenprozentsatz:{" "}
+                  <span className="ml-10 text-blue-600"> {feePercentage}%</span>
+                </div>
+                <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
+                  PayPal Gebühren:{" "}
                   <span className="ml-10 text-blue-600">
-                    ${totalPurchaseAmount.toFixed(2)}
+                    ${feeAmount.toFixed(2)}{" "}
                   </span>
                 </div>
-              )}
-              {showBalance && (
-                <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
-                  Restbetrag:{" "}
-                  <span className="ml-10 text-blue-600">
-                    ${totalBalanceAmount.toFixed(2)}
-                  </span>
-                </div>
-              )}
-            </div>
+                {showPurchase && (
+                  <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
+                    Kaufpreis:{" "}
+                    <span className="ml-10 text-blue-600">
+                      ${totalPurchaseAmount.toFixed(2)}
+                    </span>
+                  </div>
+                )}
+                {showBalance && (
+                  <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
+                    Restbetrag:{" "}
+                    <span className="ml-10 text-blue-600">
+                      ${totalBalanceAmount.toFixed(2)}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </form>
           )}
         </div>
       </div>
