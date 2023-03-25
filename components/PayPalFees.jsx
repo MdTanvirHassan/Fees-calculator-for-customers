@@ -61,21 +61,17 @@ function PayPalFeeCalculator() {
         setFeePercentage(0);
         setFeeCharge(0.35);
         setShowDealerConditions(false);
-        setPaymentOutPercentage(0);
       } else if (paymentType === "donations") {
         setFeePercentage(1.5);
         setFeeCharge(0.35);
         setShowDealerConditions(false);
-        setPaymentOutPercentage(0);
       } else if (paymentType === "micropayment") {
         setFeePercentage(10);
         setFeeCharge(0.1);
         setShowDealerConditions(false);
-        setPaymentOutPercentage(0);
       } else if (paymentType === "conditions") {
         setShowDealerConditions(true);
         setFeeCharge(0.35);
-        setPaymentOutPercentage(0);
       } else {
         // reload the page if an unexpected payment type is selected
         window.location.reload();
@@ -110,7 +106,7 @@ function PayPalFeeCalculator() {
       setShowCalculation(true);
 
       if (purchasePrice > 0) {
-        const fee = purchasePrice * (feePercentage / 100) + feeCharge;
+        const fee = purchasePrice * (feePercentage / 100) + purchasePrice * (paymentOutPercentage / 100) + feeCharge;
         const total = purchasePrice + fee;
         const total1 = purchasePrice - fee;
         setFeeAmount(fee);
