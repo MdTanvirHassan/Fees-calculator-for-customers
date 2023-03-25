@@ -14,7 +14,7 @@ function PayPalFeeCalculator() {
   const [showPurchase, setShowPurchase] = useState(true);
   const [showDealerConditions, setShowDealerConditions] = useState(false);
   const [showCalculation, setShowCalculation] = useState(false);
-  const [paymentOutPercentage, setPaymentOutPercentage] = useState(5.48);
+  const [paymentOutPercentage, setPaymentOutPercentage] = useState(0);
 
   const handleCalculationBasisChange = (event) => {
     const selectedValue = event.target.value;
@@ -61,17 +61,21 @@ function PayPalFeeCalculator() {
         setFeePercentage(0);
         setFeeCharge(0.35);
         setShowDealerConditions(false);
+        setPaymentOutPercentage(0);
       } else if (paymentType === "donations") {
         setFeePercentage(1.5);
         setFeeCharge(0.35);
         setShowDealerConditions(false);
+        setPaymentOutPercentage(0);
       } else if (paymentType === "micropayment") {
         setFeePercentage(10);
         setFeeCharge(0.1);
         setShowDealerConditions(false);
+        setPaymentOutPercentage(0);
       } else if (paymentType === "conditions") {
         setShowDealerConditions(true);
         setFeeCharge(0.35);
+        setPaymentOutPercentage(0);
       } else {
         // reload the page if an unexpected payment type is selected
         window.location.reload();
@@ -84,15 +88,15 @@ function PayPalFeeCalculator() {
       event.preventDefault();
       const paymentOut = event.target.value;
       if (paymentOut === "Britain") {
-        setPaymentOutPercentage(3.78);
+        setPaymentOutPercentage(1.29);
       } else if (paymentOut == "USA") {
-        setPaymentOutPercentage(4.48);
+        setPaymentOutPercentage(1.99);
       } else if (paymentOut == "german") {
-        setPaymentOutPercentage(5.48);
+        setPaymentOutPercentage(0);
       } else if (paymentOut == "EEA") {
-        setPaymentOutPercentage(5.48);
+        setPaymentOutPercentage(0);
       } else if (paymentOut == "other") {
-        setPaymentOutPercentage(5.48);
+        setPaymentOutPercentage(2.99);
       } else {
         // reload the page if an unexpected payment type is selected
         window.location.reload();
@@ -315,7 +319,7 @@ function PayPalFeeCalculator() {
                 <option value="EEA">EEA</option>
                 <option value="Britain">Graet Britain</option>
                 <option value="USA">USA/Canada</option>
-                <option value=" other">All other</option>
+                <option value="other">All other</option>
               </select>
             </div>
             <div className="justify-evenly mb-5 bg-gray-50 rounded-lg p-3 shadow-md ">
