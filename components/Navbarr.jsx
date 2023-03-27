@@ -20,7 +20,7 @@ const Navbarr = () => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Navbar.Link
-            href="#"
+            href="/"
             active={true}
           >
             <p className="text-xl">Heim</p>
