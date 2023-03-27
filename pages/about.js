@@ -3,7 +3,7 @@ import React from "react";
 const about = () => {
   return (
     <div id="about" className="container m-auto py-5">
-      <h2 className="text-center py-5">About Us</h2>
+      <h2 className="text-center bg-gray-50 shadow-md rounded-md py-5 mb-6">About Us</h2>
       <p className="text-justify p-10 bg-orange-50 shadow-xl rounded-md ">
         Willkommen auf Paypal Gebührenrechner! Wir sind ein kostenloses
         Online-Tool, das entwickelt wurde, um Ihnen zu helfen, die Gebühren zu

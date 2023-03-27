@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import Image from "next/image";
 import logo from "../public/assets/1.png";
+import {AiFillFacebook, AiFillInstagram,AiOutlineTwitter,AiFillLinkedin,AiFillMail} from "react-icons/ai"
 
 const Footer = () => {
   return (
@@ -14,6 +15,10 @@ const Footer = () => {
                 <p className="mt-2 text-sm text-gray-500">
               Lorem ipsum dolor sit amet.
             </p>
+            <div className="flex space-x-2 m-auto py-2">
+                <AiFillMail className="text-2xl"/>
+                <a  mailto="contact@payrechner.de">contact@payrechner.de</a>
+            </div>
           </div>
           <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
             <div className="lg:w-1/3 md:w-1/2 w-full px-4">
@@ -69,6 +74,14 @@ const Footer = () => {
                       Submit
                     </button>
                   </form>
+                  <div className="py-2 m-auto">
+                    <ul className="flex space-x-2 text-4xl m-auto">
+                        <li className=""><AiFillFacebook/></li>
+                        <li><AiFillInstagram/></li>
+                        <li><AiOutlineTwitter/></li>
+                        <li><AiFillLinkedin/></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

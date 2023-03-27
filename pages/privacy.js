@@ -3,7 +3,7 @@ import React from "react";
 const privacy = () => {
   return (
     <div id="privacy" className="container m-auto py-5">
-      <h2 className="text-center py-5">Privacy Policy</h2>
+      <h2 className="text-center bg-gray-50 shadow-md rounded-md py-5 mb-6">Privacy Policy</h2>
       <p className="text-justify p-10 bg-orange-50 shadow-xl rounded-md">
         Datenschutzerklärung für Paypal Gebührenrechner <br />
         <br />

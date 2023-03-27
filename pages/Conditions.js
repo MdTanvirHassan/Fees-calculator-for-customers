@@ -4,7 +4,7 @@ const Conditions = () => {
   return (
     <div>
       <div id="conditions" className="container m-auto py-5">
-        <h2 className="text-center py-5">Terms & Conditions Page</h2>
+        <h2 className="text-center bg-gray-50 shadow-md rounded-md py-5 mb-6">Terms & Conditions Page</h2>
         <p className="text-justify p-10 bg-orange-50 shadow-xl rounded-md">
           Bitte lesen Sie diese Nutzungsbedingungen sorgfältig durch, bevor Sie
           unseren Paypal Gebührenrechner nutzen. Mit der Nutzung unserer Website
