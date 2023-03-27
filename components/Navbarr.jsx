@@ -26,7 +26,7 @@ const Navbarr = () => {
             <p className="text-xl">Heim</p>
 
           </Navbar.Link>
-          <Navbar.Link href="#">
+          <Navbar.Link href="/about">
             <p className="text-xl">Über Uns</p>
           </Navbar.Link>
           <Navbar.Link href="#">
@@ -35,7 +35,7 @@ const Navbarr = () => {
           <Navbar.Link href="#">
             <p className="text-xl">Preisgestaltung</p>
           </Navbar.Link>
-          <Navbar.Link href="#">
+          <Navbar.Link href="/contact">
             <p className="text-xl">Kontakt</p>
 
           </Navbar.Link>
