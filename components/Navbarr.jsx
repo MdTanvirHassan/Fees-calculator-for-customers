@@ -9,15 +9,8 @@ const Navbarr = () => {
         fluid={true}
         rounded={true}
       >
-        <Navbar.Brand href="#">
-               <Image
-                src={NavLogo}
-                alt="/"
-                width={140} height={100} 
-                className="cursor-pointer"
-              />
-        </Navbar.Brand>
-        <Navbar.Toggle />
+        
+        
         <Navbar.Collapse>
           <Navbar.Link
             href="/"
@@ -29,6 +22,18 @@ const Navbarr = () => {
           <Navbar.Link href="/about">
             <p className="text-xl">Über Uns</p>
           </Navbar.Link>
+          </Navbar.Collapse>
+          
+          <Navbar.Brand href="#">
+               <Image
+                src={NavLogo}
+                alt="/"
+                width={140} height={100} 
+                className="cursor-pointer"
+              />
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
           <Navbar.Link href="#">
             <p className="text-xl"> Dienstleistungen</p>
           </Navbar.Link>
