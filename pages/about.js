@@ -2,9 +2,9 @@ import React from "react";
 
 const about = () => {
   return (
-    <div id="about" className="container m-auto py-5">
+    <div id="about" className="container  m-auto py-5">
       <h1 className="text-gray-900 text-center  font-bold text-2xl pb-8 mb-5">Über Uns</h1>
-         <div className="text-justify text-gray-900 tracking-widest  p-10">
+         <div className="text-justify text-gray-900 tracking-widest shadow-xl p-10">
          <p>Willkommen auf Paypal Gebührenrechner! Wir sind ein kostenloses
            Online-Tool, das entwickelt wurde, um Ihnen zu helfen, die Gebühren zu
             berechnen, die von Paypal bei Transaktionen erhoben werden.</p> <br/>
