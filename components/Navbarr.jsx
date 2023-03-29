@@ -4,7 +4,7 @@ import Image from "next/image";
 import NavLogo from "../public/assets/logo.png";
 const Navbarr = () => {
   return (
-    <>
+    <div className="container m-auto">
       <Navbar
         fluid={true}
         rounded={true}
@@ -48,7 +48,7 @@ const Navbarr = () => {
       </Navbar>
 
 
-    </>
+    </div>
   );
 };
 

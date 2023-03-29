@@ -201,19 +201,20 @@ function PayPalFeeCalculator() {
               </select>
             </div>
 
-            <div className="relative">
+            <div className="">
+            <label
+                htmlFor="floating_outlined"
+                className="block mb-2 text-xl font-bold text-gray-900">
+                {calculationBasis}
+              </label>
               <input
                 type="number"
                 id="purchasePrice"
                 value={purchasePrice}
                 onChange={handlePurchasePriceChange}
-                className="block px-3 pb-3 pt-4 w-full text-lg text-gray-500 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600"
+                className="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-3 px-5"
               />
-              <label
-                htmlFor="floating_outlined"
-                className="absolute text-xl font-bold text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
-                {calculationBasis}
-              </label>
+              
             </div>
 
             <div className="my-4">
