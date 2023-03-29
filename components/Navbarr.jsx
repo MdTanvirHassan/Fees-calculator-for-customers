@@ -13,10 +13,11 @@ const Navbarr = () => {
       >
         
         
-        <Navbar.Collapse>
+        <Navbar.Collapse  className="hidden md:static">
           <Navbar.Link
             href="/"
             // active={true}
+            
           >
             <p className="text-xl">Heim</p>
 
@@ -35,6 +36,19 @@ const Navbarr = () => {
               />
         </Navbar.Brand>
         <Navbar.Toggle />
+        <Navbar.Collapse  className="md:hidden static">
+          <Navbar.Link
+            href="/"
+            // active={true}
+            
+          >
+            <p className="text-xl">Heim</p>
+
+          </Navbar.Link>
+          <Navbar.Link href="/about">
+            <p className="text-xl">Über Uns</p>
+          </Navbar.Link>
+          </Navbar.Collapse>
         <Navbar.Collapse>
           <Navbar.Link href="/Paypal">
             <p className="text-xl"> Paypal</p>
