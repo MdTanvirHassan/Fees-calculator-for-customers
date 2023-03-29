@@ -343,7 +343,7 @@ function PayPalFeeCalculator() {
                 </h3>
                 <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
                   Gebührenprozentsatz:{" "}
-                  <span className="ml-10 text-blue-600"> {feePercentage}%</span>
+                  <span className="ml-10 text-blue-600"> {feePercentage.toFixed(2)}%</span>
                 </div>
                 <div className="text-xl text-center bg-orange-50 rounded-lg shadow-md p-5">
                   PayPal Gebühren:{" "}
