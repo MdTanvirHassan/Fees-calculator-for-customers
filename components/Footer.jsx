@@ -1,99 +1,83 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import logo from "../public/assets/1.png";
+import logo from "../public/assets/logo2.png";
 import {AiFillFacebook, AiFillInstagram,AiOutlineTwitter,AiFillLinkedin,AiFillMail} from "react-icons/ai"
 
 const Footer = () => {
   return (
     <div>
       <footer className="text-gray-600 body-font bg-black/10">
-        <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-          <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left ">
-            
-                <Image src={logo} alt='...'  width={100}  height={100}  className="w-[90px] h-[60px] "/>
-                <p className="mt-2 text-sm text-gray-500">
-              Lorem ipsum dolor sit amet.
-            </p>
-            <div className="flex space-x-2 m-auto py-2">
-                <AiFillMail className="text-2xl"/>
-                <a  mailto="contact@payrechner.de">contact@payrechner.de</a>
-            </div>
-          </div>
-          <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
-            <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-              <h2 className=" text-gray-900 tracking-widest text-sm mb-3">
-                Privacy & Terms
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <Link href={'/privacy'} className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                <Link href={'/Conditions'} className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                Terms & Conditions
-                  </Link>
-                </li>
-              </nav>
-            </div>
-            <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-              <h2 className=" text-gray-900 tracking-widest text-sm mb-3">
-                Quick Links
-              </h2>
-              <nav className="list-none mb-10">
-                <li>
-                <Link href={'/contact'} className="text-gray-600 hover:text-gray-800 cursor-pointer">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                <Link href={'/about'} className="text-gray-600 hover:text-gray-800 cursor-pointer">About Us</Link>
-                </li>
-              </nav>
-            </div>
+        <div className="container px-2 py-10 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
 
-            <div className="lg:w-1/3 md:w-1/2 w-full px-4">
-              <div className="mt-0 justify-center md:items-center pb-5  md:mt-0  text-left">
-                <div className=" px-2 ">
-                  <h3 className="font-bold  text-xl  mb-4 text-black text-center">
-                    Subscribe To Newsletter
-                  </h3>
-                  <form action="" className="flex justify-center">
-                    <div className=" ">
-                      <input
-                        type="email"
-                        className="bg-white text-start border border-gray-300 text-gray-900 text-sm rounded-lg block w-full py-2  shadow-xl shadow-gray-300"
-                        placeholder="Enter Your Email"
-                      />
+          <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+             <div className="lg:w-1/4   w-full px-4" >
+              
+                 <a href="/">
+                 <Image src={logo} alt="..." className="cursor-pointer m-auto md:m-0 mb-4" width={120} height={120} />
+                  </a>
+              </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+              <h2 className=" text-gray-900 font-bold text-xl tracking-widest mb-3">
+                Datenschutz und Bedingungen
+              </h2>
+              <nav className="list-none mb-5">
+                <li>
+                  <Link href={'/Privacy'} className="text-gray-600 text-lg mb-2 hover:text-gray-800 cursor-pointer">
+                   Datenschutz-Bestimmungen
+                  </Link>
+                </li>
+                <li>
+                <Link href={'/Condition'} className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer">
+                Terms & amp
+                  </Link>
+                </li>
+              </nav>
+            </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+              <h2 className=" text-gray-900 font-bold text-xl tracking-widest mb-4">
+              Schnelle Links
+              </h2>
+              <nav className="list-none mb-10">
+                <li>
+                <Link href={'/contact'} className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer">
+                Kontaktiere uns
+                  </Link>
+                </li>
+                <li>
+                <Link href={'/about'} className="text-gray-600 text-lg hover:text-gray-800 cursor-pointer">Über uns</Link>
+                </li>
+              </nav>
+            </div>
+            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+              <h2 className=" text-gray-900 font-bold text-xl tracking-widest mb-4">
+              Kontaktiere uns
+              </h2>
+              <div className="flex space-x-2 justify-center md:justify-start  mb-4">
+                     <AiFillMail className="text-2xl"/>
+                      <a className="text-lg"  mailto="kontact@payrechner.de"> kontact@payrechner.de</a>
                     </div>
-                    <button
-                      type="button"
-                      className="text-white bg-orange-500 hover:bg-black/70 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm px-5 py-0 text-center -ml-1 z-10">
-                      Submit
-                    </button>
-                  </form>
-                  <div className="py-2 m-auto">
-                    <ul className="flex space-x-2 text-4xl m-auto">
+              <nav className="list-none mb-10">
+                  
+                    <div className="py-2 ">
+                    <ul className="flex space-x-2 text-4xl justify-center md:justify-start">
                         <li className=""><AiFillFacebook/></li>
                         <li><AiFillInstagram/></li>
                         <li><AiOutlineTwitter/></li>
                         <li><AiFillLinkedin/></li>
                     </ul>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="bg-gray-100">
-          <div className="container mx-auto items-center justify-center py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-            <p className="text-gray-500 text-sm text-center  sm:text-left">
-            © Copyright 2023 Paypal —  All Rights Reserved
-            </p>
+                </nav>
+             </div>
+           </div>
+         </div>
+          <div className=" bg-gray-100">
+             <div className=" items-center justify-center py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+             <p className="text-gray-800 text-md text-center ">
+             © Copyright 2023 Pay Rechner— All Rights Reserved
+              </p>
             
-          </div>
+             </div>
         </div>
       </footer>
     </div>

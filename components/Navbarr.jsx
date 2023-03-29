@@ -4,7 +4,9 @@ import Image from "next/image";
 import NavLogo from "../public/assets/logo.png";
 const Navbarr = () => {
   return (
-    <div className="container m-auto">
+    <>
+     
+     <div className="px-7 shadow-xl sticky top-0 bg-white z-50">
       <Navbar
         fluid={true}
         rounded={true}
@@ -14,7 +16,7 @@ const Navbarr = () => {
         <Navbar.Collapse>
           <Navbar.Link
             href="/"
-            active={true}
+            // active={true}
           >
             <p className="text-xl">Heim</p>
 
@@ -24,31 +26,27 @@ const Navbarr = () => {
           </Navbar.Link>
           </Navbar.Collapse>
           
-          <Navbar.Brand href="#">
+          <Navbar.Brand href="/">
                <Image
                 src={NavLogo}
                 alt="/"
-                width={140} height={100} 
+                width={80} height={80} 
                 className="cursor-pointer"
               />
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Navbar.Link href="#">
-            <p className="text-xl"> Dienstleistungen</p>
-          </Navbar.Link>
-          <Navbar.Link href="#">
-            <p className="text-xl">Preisgestaltung</p>
+          <Navbar.Link href="/Paypal">
+            <p className="text-xl"> Paypal</p>
           </Navbar.Link>
           <Navbar.Link href="/contact">
             <p className="text-xl">Kontakt</p>
-
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
 
-
-    </div>
+      </div>
+    </>
   );
 };
 
