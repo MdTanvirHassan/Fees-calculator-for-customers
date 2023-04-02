@@ -1,4 +1,3 @@
-import Payment from '@/components/payment'
 import { Html, Head, Main, NextScript } from 'next/document'
 
 export default function Document() {
@@ -12,7 +11,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <Payment/>
       </body>
     </Html>
   )

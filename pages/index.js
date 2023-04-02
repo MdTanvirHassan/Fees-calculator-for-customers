@@ -1,5 +1,6 @@
 import FaqPage from '@/components/FaqPage'
 import PayPalFeesCalculator from '@/components/PayPalFees'
+import Payment from '@/components/payment'
 import Head from 'next/head'
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       </Head>
       <main>
         <PayPalFeesCalculator/>
+        <Payment/>
         <FaqPage/>
       </main>
       
