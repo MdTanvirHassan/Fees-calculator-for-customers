@@ -99,9 +99,9 @@ function PayPalFeeCalculator() {
 
       if (purchasePrice > 0) {
         // const fee = purchasePrice * (feePercentage / 100) + feeCharge;
-        const fee = purchasePrice * (feePercentage / 100) + purchasePrice * (paymentOutPercentage / 100) + feeCharge;
-        const total = purchasePrice + fee;
-        const total1 = purchasePrice - fee;
+        const fee = (purchasePrice * (feePercentage / 100) + purchasePrice * (paymentOutPercentage / 100) + feeCharge).toFixed(2);
+        const total = (purchasePrice + fee).toFixed(2);
+        const total1 = (purchasePrice - fee).toFixed(2);
         setFeeAmount(fee);
         setTotalPurchaseAmount(total);
         setTotalBalanceAmount(total1);
@@ -250,7 +250,7 @@ function PayPalFeeCalculator() {
             </div>
             <div className="justify-evenly mb-5 bg-gray-50 rounded-lg p-3 shadow-md ">
               <span className=' font-bold'>Gebührensatz: </span>
-              <span className="ml-20 md:ml-48 text-blue-500 text-lg "> {feePercentage + paymentOutPercentage}% <span className='text-black'>and</span> €{feeCharge}</span>
+              <span className="ml-20 md:ml-48 text-blue-500 text-lg "> {(feePercentage + paymentOutPercentage).toFixed(2)}% <span className='text-black'>and</span> €{feeCharge}</span>
             </div>
             <div className="mb-4">
               <div
